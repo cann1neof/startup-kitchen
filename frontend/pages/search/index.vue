@@ -60,7 +60,11 @@ export default {
     },
     methods: {
         search(){
-            
+            if(this.searchingRequest.replace(/\s/g,"") != ""){
+                this.$axios.get(`${this.searchingRequest.replace(' ', '+')}`).then(res => {
+                    this.cards = res.data.cards
+                }).catch(err => console.log(err))
+            }
         },
     },
 }

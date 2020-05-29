@@ -72,6 +72,16 @@ export const actions = {
       }
     }
   },
+  async fetchCards(ctx){
+    try{
+      const res = await this.$axios.get()
+      ctx.commit('setCards', res.data)
+    } catch(error){
+      if (error.response.status == 401) {
+        ctx.commit('setUser', null)
+      }
+    }
+  },
   async login(ctx, { email, password}) {
     return this.$axios.post('/api/get_token', {email, password})
     .then(async response => {
@@ -82,7 +92,7 @@ export const actions = {
       })
     })
   },
-  async register(ctx, {email, name, password}) {
-    return await this.$axios.post('/api/register', {email,name, password})
+  async register(ctx, {username, name, email, password}) {
+    return await this.$axios.post('/api/register', {username, name, email, password})
   }
 }

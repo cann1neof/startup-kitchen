@@ -153,7 +153,26 @@ export default {
             this.file = file || null
         },
         saveProject(){
-            this.themes = this.chips.filter(el => el.choosen).map(el => el.text)
+            const themes = JSON.stringify(this.chips.filter(el => el.choosen).map(el => el.text))
+            const title = this.title
+            const text = this.text
+            const contacts = JSON.stringify(this.contacts)
+            const outputData = { themes, title, text, contacts }
+            this.$axios.post('', outputData).then(res => {
+                if(res.status == 201 && res.data.id){
+                    if (this.file){
+                        const config = {
+                            headers: {
+                                'content-type': 'multipart/form-data'
+                            }
+                        }
+                        let formData = new FormData()
+                        formData.append('image', this.file)
+                        this.$axios.post(`${res.data.id}`, formData, config ).then(res => console.log(res))
+                    }
+                }
+            })
+            .catch(err => console.log('rrr', err))
             
         },
         addNewContact(){

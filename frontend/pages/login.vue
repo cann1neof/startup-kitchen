@@ -60,7 +60,6 @@ export default {
     }),
     methods: {
         login(){
-            
             this.$store.dispatch('login', {email: this.email, password: this.password}).then(r=>{
                 document.location = '/'
             }).catch(err=>console.log(err))

@@ -86,7 +86,7 @@ export default {
     data: () => ({
         searchingRequest: '',
         chips: [
-            {text: 'THEME 1', value:0}, {text: 'THEME 2', value:1}, {text: 'THEME 3', value:2}, {text: 'THEME 4', value:3}
+            {text: 'THEME 1'}, {text: 'THEME 2'}, {text: 'THEME 3'}, {text: 'THEME 4'}
         ],
         value: null,
         radioValue: null,
@@ -97,8 +97,14 @@ export default {
     },
     methods: {
         search(){
-            if(this.searchingRequest){
-                console.log(this.value)
+            if(this.searchingRequest.replace(/\s/g,"") != "" && this.value && this.radioValue){
+                const searchingRequest = this.searchingRequest.replace(/\s/g, '+')
+                const searchingFilters = this.value.join('+').replace(/\s/g, '_')
+                const searchingType = this.radioValue
+                console.log(searchingRequest, searchingFilters, searchingType)
+                this.$axios.get(`${searchingRequest}`).then(res => {
+                    this.cards = res.data.cards
+                }).catch(err => console.log(err))
             }
         }
     },

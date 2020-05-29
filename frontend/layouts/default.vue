@@ -62,11 +62,13 @@
 			height="40px"
 			color="#D6D6D6"
 			class="d-inline-block ml-0 mr-2 my-0 img-container-circle"
+			v-if="$store.getters.user"
 		>
 			<v-img
 				width="100%"
 				height="100%"
 				contain	
+				
 				src="/default-account.png"
 			></v-img>
 		</v-sheet>
@@ -76,9 +78,10 @@
 			color="transparent"
 			class="d-inline-block mr-4"
 			height="40px"
+			v-if="$store.getters.user"
 		>
 			<div class="centered-line">
-				username
+				{{$store.getters.user.username}}
 			</div>
 		</v-sheet>
 

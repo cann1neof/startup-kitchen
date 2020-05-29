@@ -15,18 +15,6 @@
             nothing="Пока что у нас нет новых проектов, но они скоро появятся!"
         ></startup-card>
 
-        <div 
-            class="text-center" 
-            style="width: 100%;"
-        >
-            <v-btn
-                class="my-3"
-                color="primary"
-                @click="getCards(cards.length)"
-            >
-                Загрузить еще
-            </v-btn>
-        </div>
     </div>
 </template>
 
@@ -42,18 +30,18 @@ export default {
         StartupCard,
     },
     methods: {
-        getCards(newStart){
-            const l = (this.cards ? this.cards.length : 0)+ newStart
-            this.cards = this.$store.getters.cards.slice(0, l)
+        getCards(){
+            this.$store.dispatch('fetchCards')
+            this.cards = this.$store.getters.cards
         }
     },
     watch: {
         $route(){
-            this.getCards(10)
+            this.getCards()
         }
     },
     mounted(){
-        this.getCards(10)
+        this.getCards()
     }
 }
 </script>

@@ -37,7 +37,11 @@ export default {
     methods: {
         getData(){
             this.user = this.$store.getters.user
-            this.cards = this.$store.getters.cards.filter( el => el.author == this.user.username)
+            // this.$axios.get(`${this.user.username}`).then(res => {
+            //     if (res.status == 200){
+            //         this.cards = res.data.cards
+            //     }
+            // })
         }
     },
     watch: {
