@@ -1,5 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
+let myenv = require('dotenv').config().parsed
+
 export default {
   mode: 'universal',
   head: {
@@ -28,7 +30,9 @@ export default {
     '@nuxtjs/dotenv',
   ],
   axios: {
+    proxy: true,
   },
+  proxy: [myenv.PROXY_API_URL, myenv.PUBLIC_FILES_URL],
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {

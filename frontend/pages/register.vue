@@ -99,6 +99,29 @@ export default {
                     console.log(err)
                 }
             }
+        },
+    },
+    computed: {
+        passwordRules(){
+            return [
+                v => !!v || 'Это поле обязательно для заполнения'
+            ]
+        },
+        nameRules(){
+            return [
+                v => !!v || 'Это поле обязательно для заполнения'
+            ]
+        },
+        usernameRules(){
+            return [
+                v => !!v || 'Это поле обязательно для заполнения'
+            ]
+        },
+        emailRule(){
+            return [
+                v => !!v || 'Это поле обязательно для заполнения',
+                v => /.+@.+\..+/.test(v) || 'Неправильный формат e-mail'
+            ]
         }
     }
 }
