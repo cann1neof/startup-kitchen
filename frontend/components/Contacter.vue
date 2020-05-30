@@ -9,7 +9,7 @@
                     v-for="(each, index) in instance"
                     :key="index"
                 >
-                    <v-icon> mdi-{{each.contactType}} </v-icon> {{each.value}}
+                    <v-icon> mdi-{{each.contactType}} </v-icon> {{each.text}}
                 </div>
             </v-card-text>
         </v-card>

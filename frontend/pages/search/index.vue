@@ -61,8 +61,13 @@ export default {
     methods: {
         search(){
             if(this.searchingRequest.replace(/\s/g,"") != ""){
-                this.$axios.get(`${this.searchingRequest.replace(' ', '+')}`).then(res => {
-                    this.cards = res.data.cards
+                this.$axios.post(`http://localhost:8000/api/card/search`,{q:this.searchingRequest}).then(res => {
+                    let tempCards = res.data
+                    for(let each of tempCards){
+                        each.themes = JSON.parse(each.themes)
+                        each.contacts = JSON.parse(each.contacts)
+                    }
+                    this.cards = tempCards
                 }).catch(err => console.log(err))
             }
         },

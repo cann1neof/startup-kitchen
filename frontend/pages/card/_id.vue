@@ -12,7 +12,7 @@
                         <span class="title-text">{{card.title}}</span>
                     </v-card-title>
                     <v-card-subtitle class="subtitle-text">
-                        @{{card.author}}
+                        @{{card.user}}
                     </v-card-subtitle>
                 </v-card>
             </v-card-text>
@@ -29,7 +29,7 @@
                         <v-card>
                             <v-card-text>
                                 <v-img
-                                    :src="card.imgUrl ||'/default-photo.png'"
+                                    :src="card.imgUrl == 'none' ? '/default-photo.png':card.imgUrl"
                                     contain
                                 ></v-img>
                             </v-card-text>
@@ -52,7 +52,7 @@
                         
                         <v-divider class="my-3"></v-divider>
 
-                        <contacter :instance="card.contactVaries"> </contacter>
+                        <contacter :instance="card.contacts"> </contacter>
                     </v-col>
                 </v-row>
             </v-card-text>

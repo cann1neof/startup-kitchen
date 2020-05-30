@@ -82,7 +82,7 @@ export default {
         passwordConfirm: '',
     }),
     methods: {
-        async register(){
+        async login(){
             if(this.password === this.passwordConfirm){
                 const data = {
                     username: this.username,
@@ -93,7 +93,7 @@ export default {
 
                 try{
                     const res = this.$store.dispatch('register', data)
-                    await this.$store.dispatch('login', {email, password})
+                    await this.$store.dispatch('login', {email: this.email, password:this.password})
                     this.$router.push('/')
                 } catch(err){
                     console.log(err)
@@ -117,7 +117,7 @@ export default {
                 v => !!v || 'Это поле обязательно для заполнения'
             ]
         },
-        emailRule(){
+        emailRules(){
             return [
                 v => !!v || 'Это поле обязательно для заполнения',
                 v => /.+@.+\..+/.test(v) || 'Неправильный формат e-mail'

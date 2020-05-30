@@ -30,8 +30,8 @@ export default {
         StartupCard,
     },
     methods: {
-        getCards(){
-            this.$store.dispatch('fetchCards')
+        async getCards(){
+            await this.$store.dispatch('fetchCards')
             this.cards = this.$store.getters.cards
         }
     },

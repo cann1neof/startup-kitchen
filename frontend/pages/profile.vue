@@ -35,13 +35,10 @@ export default {
         StartupCard,
     },
     methods: {
-        getData(){
+        async getData(){
             this.user = this.$store.getters.user
-            // this.$axios.get(`${this.user.username}`).then(res => {
-            //     if (res.status == 200){
-            //         this.cards = res.data.cards
-            //     }
-            // })
+            await this.$store.dispatch('fetchCards')
+            this.cards = this.$store.getters.cards.filter(el => el.username == this.user.username)
         }
     },
     watch: {

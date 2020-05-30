@@ -157,8 +157,9 @@ export default {
             const title = this.title
             const text = this.text
             const contacts = JSON.stringify(this.contacts)
-            const outputData = { themes, title, text, contacts }
-            this.$axios.post('', outputData).then(res => {
+            const user = this.$store.getters.user.username
+            const outputData = { themes, title, text, contacts, user}
+            this.$axios.post('http://localhost:8000/api/card/create', outputData).then(res => {
                 if(res.status == 201 && res.data.id){
                     if (this.file){
                         const config = {
@@ -168,7 +169,7 @@ export default {
                         }
                         let formData = new FormData()
                         formData.append('image', this.file)
-                        this.$axios.post(`${res.data.id}`, formData, config ).then(res => console.log(res))
+                        this.$axios.post(`http://localhost:8000/api/card/${res.data.id}/img`, formData, config ).then(res => console.log(res))
                     }
                 }
             })

@@ -28,14 +28,14 @@
                 </v-card-title>
 
                 <v-card-subtitle>
-                    {{card.author}}
+                    {{card.user}}
                 </v-card-subtitle>
 
                 <v-card-text>
                     <v-row>
                         <v-col cols="4">
                             <v-img
-                                :src="card.imgUrl ||'/default-photo.png'"
+                            :src="card.imgUrl == 'none' ? '/default-photo.png' : 'http://localhost:8000/storage/'+card.imgUrl"
                             ></v-img>
                         </v-col>
                         <v-col cols="8">
